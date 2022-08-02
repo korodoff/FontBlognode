@@ -1,11 +1,15 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import Card from "../components/Card";
 import SmallCard from "../components/SmallCard";
-import { useDetailsContextConsumer } from "../Context/detailsContext";
+
 const BlogPage = ({category}) => {
-  const {details} = useDetailsContextConsumer();
-  const arrInd = ()=>{ return Math.floor(Math.random() * 50)};
-  const topposts = [details[arrInd()], details[arrInd()], details[arrInd()], details[arrInd()]] 
+  const[details, setDetails]= useState([])
+
+useEffect(()=>{
+  axios.get("https://blogdatas.herokuapp.com/api/details").then((response) =>setDetails(response.data)).catch((err)=> console.log(err))
+
+},[])
 
   return (
     <div className="category_page bollywood_container">
@@ -27,7 +31,7 @@ const BlogPage = ({category}) => {
       </div>
       <div className="sub_column">
         <h1 className="side_title title">Top Posts</h1>
-        {topposts
+        {details.sort(() => Math.random() - Math.random()).slice(0, 4)
           .map((n) => (
             <SmallCard
               key={n.id}

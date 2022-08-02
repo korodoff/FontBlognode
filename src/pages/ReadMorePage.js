@@ -1,40 +1,40 @@
-import React from "react";
-// import { useEffect } from 'react';
-import { useParams } from "react-router-dom";
+import React from 'react'
+import { useLocation } from 'react-router-dom'
+import { useEffect,useState } from 'react';
 import Card from "../components/Card";
-import { useDetailsContextConsumer } from "../Context/detailsContext";
+import axios from 'axios';
 
 const ReadMorePage = () => {
-  const { details } = useDetailsContextConsumer();
-  const params = useParams();
-  const { id } = params;
-  // useEffect(() => {
-  //   return () => {
-  //     second
-  //   }
-  // }, [third])
 
-  const fullBlog = details.filter((post) => {
-    return post.id === parseInt(id);
-  });
-  const { title, Image, description, category, date } = fullBlog[0];
+    const[data,setData]=useState([])
+  
+  useEffect(() =>{
+    axios.get("https://blogdatas.herokuapp.com/api/details").then((response) =>setData(response.data))
+
+
+  },[])
+
+
+const location = useLocation();
+
+const {title, img, description,category,date} = location.state;
+console.log(title)
   return (
-    <>
-      <div className="read_more_page">
+
+    <div className='read_more_page'>
         <h1>{title}</h1>
-        <img src={Image} alt="" />
+        <img src={img} alt="" />
         <h4>
           {category}/{date}
         </h4>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{description}</p>
-      </div>
-      <br/>
-      <br/>
-      <br/>
+
+        <p>{description}</p>
+
+        <br/>
       <div style={{width:'85%', margin: '10px auto'}}>
        <h1 className="title head-title"> Read More From {category}</h1>  
-       {details.filter((cat)=>{ 
-       return cat.category===category;}).map((n)=>{ return(
+       {data.map((n)=>{ return(
          <Card
          key={n.id}
          articleid={n.id}
@@ -47,7 +47,10 @@ const ReadMorePage = () => {
          />
          )})}
       </div>
-    </>
-  );
-};
+
+      
+    </div>
+  )
+}
+
 export default ReadMorePage;

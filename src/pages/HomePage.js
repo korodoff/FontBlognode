@@ -1,19 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Card from "../components/Card";
 import SmallCard from "../components/SmallCard";
 import CardHome from "../components/CardHome";
-import {useDetailsContextConsumer} from '../Context/detailsContext';//HOC
+// import {useDetailsContextConsumer} from '../Context/detailsContext';//HOC
+import axios from "axios";
 
 const HomePage = () => {
-  const {details} = useDetailsContextConsumer();
+  // const [load, setLoad] = useState(false)
+  const [datahome, setDataHome] = useState([])
+  const [latest, setLatest] = useState([])
+  const [latest2, setLatest2] = useState([])
+  const [latestarticles, setLatestarticles] = useState([])
+  const [topposts, setToppost] = useState([])
   const arrInd = ()=>{ return Math.floor(Math.random() * 50)};//to get random data
-  const latest = [details[arrInd()], details[arrInd()], details[arrInd()]]
-  const latest2 = [details[arrInd()], details[arrInd()], details[arrInd()]]
-  const latestarticles = [details[arrInd()], details[arrInd()], details[arrInd()], details[arrInd()], details[arrInd()]]
-  const topposts = [details[arrInd()], details[arrInd()], details[arrInd()], details[arrInd()]] 
+  // const check = details.length
+  
+  // const latest = [details[arrInd()], details[arrInd()], details[arrInd()]]
+  // const latest2 = [details[arrInd()], details[arrInd()], details[arrInd()]]
+  // const latestarticles = [details[arrInd()], details[arrInd()], details[arrInd()], details[arrInd()], details[arrInd()]]
+  // const topposts = [details[arrInd()], details[arrInd()], details[arrInd()], details[arrInd()]] 
+  // console.log(check)
+  
+
+  useEffect(()=>{
+    axios.get("https://blogdatas.herokuapp.com/api/details").then((response) =>setDataHome(response.data))
+    //  .then(setLatest([datahome[arrInd()],datahome[arrInd()],datahome[arrInd()],])).then(console.log(latest))
+    // .then(setLatest2([datahome[arrInd()],datahome[arrInd()],datahome[arrInd()],]))
+    // .then(setLatestarticles([datahome[arrInd()],datahome[arrInd()],datahome[arrInd()],]))
+    // .then(setToppost([datahome[arrInd()],datahome[arrInd()],datahome[arrInd()],]));
+    // console.log(latest,latest2)
+    
+},[])
+  
 
   return (
+
+    
+    
     <div className="home_container">
       <div className="banner-image">
         <div className="main-image" >
@@ -41,7 +65,7 @@ const HomePage = () => {
       <div className="latest_news">
         <h1 className="title">The Latest</h1>
         <div className="row_container">
-            { latest
+            {datahome.sort(() => Math.random() - Math.random()).slice(0, 3)
               .map((n) => (
                 <CardHome 
                   key={n.id}
@@ -60,7 +84,7 @@ const HomePage = () => {
       <div className="category_page">
         <div className="column_main">
           <h1 className="title head-title">Latest Article</h1>
-          { latestarticles
+          { datahome.sort(() => Math.random() - Math.random()).slice(0, 3)
             .map((n) => (
               <Card
                 key={n.id}
@@ -74,7 +98,7 @@ const HomePage = () => {
         </div>
         <div className="sub_column">
           <h1 className="side_title title">Top Posts</h1>
-          {topposts
+          {datahome.sort(() => Math.random() - Math.random()).slice(0, 3)
             .map((n) => (
               <SmallCard
                 key={n.id}
@@ -95,7 +119,7 @@ const HomePage = () => {
         <h1 className="title">The Latest</h1>
         <div className="row_container">
           
-            {latest2
+            {datahome.sort(() => Math.random() - Math.random()).slice(0, 3)
               .map((n) => (
                 <CardHome 
                   key={n.id}
@@ -111,6 +135,7 @@ const HomePage = () => {
         </div>
       </div>
     </div>
+ 
   );
 };
 

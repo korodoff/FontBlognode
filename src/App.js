@@ -4,12 +4,12 @@ import HomePage from "./pages/HomePage";
 import BlogPage from "./pages/BlogPage";
 import "./App.css";
 import ReadMorePage from "./pages/ReadMorePage";
-import { DetailsContextProvider } from "./Context/detailsContext";
+// import { DetailsContextProvider } from "./Context/detailsContext";
 
 function App() {
   return (
     <div className="App">
-      <DetailsContextProvider>
+      {/* <DetailsContextProvider> */}
         <BrowserRouter>
           <Header />
           <Routes>
@@ -22,7 +22,7 @@ function App() {
             <Route path="/category/:id" element = {<ReadMorePage/>} />
           </Routes>
         </BrowserRouter>
-      </DetailsContextProvider>
+      {/* </DetailsContextProvider> */}
     </div>
   );
 }
