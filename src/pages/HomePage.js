@@ -7,20 +7,9 @@ import CardHome from "../components/CardHome";
 import axios from "axios";
 
 const HomePage = () => {
-  // const [load, setLoad] = useState(false)
   const [datahome, setDataHome] = useState([])
-  const [latest, setLatest] = useState([])
-  const [latest2, setLatest2] = useState([])
-  const [latestarticles, setLatestarticles] = useState([])
-  const [topposts, setToppost] = useState([])
-  const arrInd = ()=>{ return Math.floor(Math.random() * 50)};//to get random data
-  // const check = details.length
-  
-  // const latest = [details[arrInd()], details[arrInd()], details[arrInd()]]
-  // const latest2 = [details[arrInd()], details[arrInd()], details[arrInd()]]
-  // const latestarticles = [details[arrInd()], details[arrInd()], details[arrInd()], details[arrInd()], details[arrInd()]]
-  // const topposts = [details[arrInd()], details[arrInd()], details[arrInd()], details[arrInd()]] 
-  // console.log(check)
+ 
+ 
   
 
   useEffect(()=>{
@@ -42,13 +31,13 @@ const HomePage = () => {
       <div className="banner-image">
         <div className="main-image" >
           <Link className="link" to="/bollywood">
-            <h1>"Our baby ..... coming soon♾️❤️" </h1>
+            
           </Link>
         </div>
         <div className="sub-images">
           <Link to="/technology">
             <img
-              src="https://images.unsplash.com/photo-1508921340878-ba53e1f016ec?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+              src="https://post.healthline.com/wp-content/uploads/2019/10/1296x728-body1-1296x728.jpg"
               alt="sub-img"
               // src={details[arrInd()].Image}
             />
@@ -56,7 +45,7 @@ const HomePage = () => {
 
           <Link to="/fitness">
             <img
-              src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Zml0bmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60"
+              src="https://www.ict.eu/sites/corporate/files/images/Cyber%20security%20header_1920x1280px%20%281%29.jpg"
               alt="sub-img"
             />
           </Link>
